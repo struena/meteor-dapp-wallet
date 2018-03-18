@@ -9,7 +9,11 @@
             {{> elements_selectableUnit}}
         {{else}}
             <span>
-                {{unit}}
+                {{#if $neq unit 'ether'}}
+                    {{unit}}
+                {{else}}
+                    STR
+                {{/if}}
             </span>
         {{/if}}
     </span>

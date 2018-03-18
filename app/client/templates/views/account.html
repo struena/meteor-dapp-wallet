@@ -120,7 +120,7 @@
             <aside class="dapp-actionbar">
                 <nav>
                     <ul>
-                        <li>
+                   <!--     <li>
                             <a href="{{pathFor route='sendTo' address=(toChecksumAddress address)}}" title="{{toChecksumAddress address}}">
                                 <i class="icon-arrow-down"></i>
                                 {{i18n "wallet.accounts.buttons.deposit"}}
@@ -144,10 +144,10 @@
                                 </button>
                             </li>  
                         {{/if}}
-
+-->
                         {{#if $eq ($.Session.get "network") "main"}}
                         <li>
-                            <a href="https://etherscan.io/address/{{address}}">
+                            <a href="https//explorer.struena.org/#/address/{{address}}" target="_blank">
                                 <i class="icon-info"></i>
                                 {{i18n "wallet.accounts.buttons.viewOnExplorer"}}
                             </a>

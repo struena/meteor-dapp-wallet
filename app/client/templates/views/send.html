@@ -14,10 +14,10 @@
             <div class="col col-6 mobile-full from">
                 <h3>{{i18n 'wallet.send.from'}}</h3>
 
-                {{> dapp_selectAccount accounts=(selectAccounts deployContract) showAccountTypes=true class='send-from'}}
+                {{> dapp_selectAccount accounts=(selectAccounts deployContract) showAccountTypes=false class='send-from'}}
 
             </div>
-
+<script>$('select.send-from').html($('select.send-from').html().replace(/ETHER/g, 'STR'))</script>
             <div class="col col-6 mobile-full">
                 {{#unless deployContract}}
                     <h3>{{i18n 'wallet.send.to'}}</h3>
@@ -58,9 +58,9 @@
                 <p class="send-info">
                     {{#if $eq (TemplateVar.get "selectedToken") "ether"}}
                         {{#if isEtherUnit}}
-                            {{{i18n 'wallet.send.texts.sendAmount' amount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000000000000000] UNIT" "ether")}}}
+                           {{{i18n 'wallet.send.texts.sendAmount' amount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000000000000000] " "ether")}}} <strong>STR</strong>
                         {{else}}
-                            {{{i18n 'wallet.send.texts.sendAmountEquivalent' amount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000] UNIT") etherAmount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000000000000000] UNIT" "ether")}}}
+                          {{{i18n 'wallet.send.texts.sendAmountEquivalent' amount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000] UNIT") etherAmount=(dapp_formatBalance (TemplateVar.get "amount") "0,0.[000000000000000000] " "ether")}}} <strong>STR</strong>
                         {{/if}}
                         {{TemplateVar.get "dailyLimitText"}}
                     {{else}}
@@ -79,12 +79,12 @@
                             <input type="radio" id="ether" value="ether" name="choose-token" {{tokenSelectedAttr 'ether'}}>
                             <label for="ether">
                                 <span class="ether-symbol">Ξ</span>
-                                <span class="token-name">ETHER</span>
+                                <span class="token-name">STR</span>
                                 <span class="balance">
                                     {{#if $neq unit 'ether'}}
-                                        {{dapp_formatBalance selectedAccount.balance "0,0.00 UNIT"}} ({{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] UNIT" "ether"}})
+                                        {{dapp_formatBalance selectedAccount.balance "0,0.00 "}} ({{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] " ""}} <strong>STR</strong>)
                                     {{else}}
-                                        {{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] UNIT" "ether"}}
+                                        {{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] " ""}} STR
                                     {{/if}}
                                 </span>
                             </label>
@@ -105,12 +105,12 @@
                 {{else}}
                     <div class="token-ether">
                         <span class="ether-symbol">Ξ</span>
-                        <span class="token-name">ETHER</span>
+                        <span class="token-name">STR</span>
                         <span class="balance">
                             {{#if $neq unit 'ether'}}
-                                {{dapp_formatBalance selectedAccount.balance "0,0.00 UNIT"}} ({{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] UNIT" "ether"}})
+                                {{dapp_formatBalance selectedAccount.balance "0,0.00 "}} ({{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] " "ether"}} <strong>STR</strong>)
                             {{else}}
-                                {{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] UNIT" "ether"}}
+                                {{dapp_formatBalance selectedAccount.balance "0,0.00[0000000000000000] " "ether"}} STR
                             {{/if}}
                         </span>
                     </div>
@@ -147,26 +147,27 @@
 
             <div class="dapp-clear-fix"></div>
         </div>
+		<script>$('div.dapp-select-gas-price span span').html($('div.dapp-select-gas-price span span').html().replace(/ETHER/g, 'STR'))</script>
 
         <!-- Total -->
         <div class="row clear total">
             <div class="col col-12 mobile-full">
                 <h3>{{i18n "commonWords.total"}}</h3>
                 {{#if $eq (TemplateVar.get "selectedToken") "ether"}}
-                    <span class="amount">{{dapp_formatBalance total "0,0.00[0000000000000000] UNIT"}}</span>
+                    <span class="amount">{{dapp_formatBalance total "0,0.00[0000000000000000] "}} STR</span>
                     {{#if $neq unit 'ether'}}
                         <br>
-                        ({{dapp_formatBalance total "0,0.00[0000000000000000] UNIT" "ether"}})
+                        ({{dapp_formatBalance total "0,0.00[0000000000000000] " "ether"}} STR)
                     {{/if}}
                 {{else}}
                     <span class="amount">{{tokenTotal}}</span> {{selectedToken.symbol}}
                     <br>
-                    {{i18n "wallet.send.estimatedFee"}}: {{dapp_formatBalance total "0,0.00[000000] UNIT" "ether"}}
+                    {{i18n "wallet.send.estimatedFee"}}: {{dapp_formatBalance total "0,0.00[000000] " "ether"}} STR
                 {{/if}}
 
                 {{#if selectedAccountIsWalletContract}}
                     <br>
-                    {{i18n "wallet.send.texts.ownerPaysGas"}} ({{dapp_formatBalance (TemplateVar.getFrom ".dapp-select-gas-price" "gasInWei") "0,0.00[0000000000000000] UNIT" "ether"}})
+                    {{i18n "wallet.send.texts.ownerPaysGas"}} ({{dapp_formatBalance (TemplateVar.getFrom ".dapp-select-gas-price" "gasInWei") "0,0.00[0000000000000000] " "ether"}} STR)
                 {{/if}}
             </div>
 
